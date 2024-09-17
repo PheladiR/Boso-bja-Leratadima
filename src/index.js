@@ -5,14 +5,14 @@ let cityElement = document.querySelector("#city");
 let descriptionElement = document.querySelector("#description");
 
 cityElement.innerHTML = response.data.city;
-descriptionElement.innerHTML = response.data.description;
+descriptionElement.innerHTML = response.data.condition.description;
 temperatureElement.innerHTML = Math.round(temperature);
 }
 
 function searchCity(city){
 let apiKey = 'f4b51cbf6039365ob7atd180fe5e0c57';
-let apiURL = 'https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric';
-axios.get(apiURL).then(refreshWeather);
+let apiUrl = 'https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric';
+axios.get(apiUrl).then(refreshWeather);
 }
 
 
