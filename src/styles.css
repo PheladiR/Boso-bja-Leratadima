@@ -66,6 +66,9 @@ main {
   color: #f65282;
 }
 
+#humidity{
+  color: #f65282;
+}
 .weather-app-temperature-container {
   display: flex;
 }
