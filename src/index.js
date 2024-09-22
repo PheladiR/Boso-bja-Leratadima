@@ -18,6 +18,8 @@ function refreshWeather(response) {
   humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
   windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
   timeElement.innerHTML = `${formatDate(date)}, `;
+
+  getForecast(response.data.city);
 }
 
 function searchCity(city) {
@@ -25,19 +27,15 @@ function searchCity(city) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
   axios
     .get(apiUrl)
-    .then(refreshWeather)
-    .catch((error) => {
-      console.error("Error fetching weather data:", error);
-    });
+    .then(refreshWeather);
 }
 
 function handleSearchSubmit(event) {
-  event.preventDefault(); // Prevent the form from reloading the page
+  event.preventDefault(); 
   let searchInput = document.querySelector("#search-form-input");
-  searchCity(searchInput.value); // Trigger the API call with the entered city
+  searchCity(searchInput.value);
 }
 
-// Event listener for the search form submission
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSearchSubmit);
 
@@ -61,8 +59,12 @@ if (minutes< 10){
 
 }
 
+function getForecast(city){
+   axios(apiUrl).then(displayForecast)
+}
 
-function displayForecast() {
+
+function displayForecast(response) {
 
   let Thedays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   let forecastHtml = "";
@@ -86,5 +88,5 @@ function displayForecast() {
 
 
 searchCity("Paris");
-displayForecast();
+
 
